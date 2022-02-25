@@ -40,6 +40,7 @@ Partial Class Form1
         Me.MinusButton = New System.Windows.Forms.Button()
         Me.DecimalPointButton = New System.Windows.Forms.Button()
         Me.PlusButton = New System.Windows.Forms.Button()
+        Me.ExpressionTextBox = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'OutputTextBox
@@ -220,11 +221,21 @@ Partial Class Form1
         Me.PlusButton.Text = "+"
         Me.PlusButton.UseVisualStyleBackColor = True
         '
+        'ExpressionTextBox
+        '
+        Me.ExpressionTextBox.Enabled = False
+        Me.ExpressionTextBox.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
+        Me.ExpressionTextBox.Location = New System.Drawing.Point(60, 4)
+        Me.ExpressionTextBox.Name = "ExpressionTextBox"
+        Me.ExpressionTextBox.Size = New System.Drawing.Size(259, 35)
+        Me.ExpressionTextBox.TabIndex = 12
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(392, 450)
+        Me.Controls.Add(Me.ExpressionTextBox)
         Me.Controls.Add(Me.DivideButton)
         Me.Controls.Add(Me.MultButton)
         Me.Controls.Add(Me.PlusButton)
@@ -269,4 +280,5 @@ Partial Class Form1
     Friend WithEvents MinusButton As Button
     Friend WithEvents DecimalPointButton As Button
     Friend WithEvents PlusButton As Button
+    Friend WithEvents ExpressionTextBox As TextBox
 End Class
