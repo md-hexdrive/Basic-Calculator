@@ -149,7 +149,6 @@
 
     Private Sub EqualsButton_Click(sender As Object, e As EventArgs) Handles EqualsButton.Click
         CalculateAndPrint()
-        MsgBox("You work")
     End Sub
 
 #End Region 'Button Event handlers
