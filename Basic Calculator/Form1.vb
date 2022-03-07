@@ -1,4 +1,12 @@
-﻿Public Class Form1
+﻿''' <summary>
+''' A basic desktop calculator built in visual basic .NET
+''' 
+''' Holds up to three pieces of information: the previous input/result, the current input, 
+''' and the binary operator that is applied to both numbers. 
+''' 
+''' All three are stored as strings until evaluated.
+''' </summary>
+Public Class Form1
 
     'The current value being input
     Dim CurrentInput As String = ""
@@ -70,6 +78,8 @@
             Dim value1 = CDec(LastInput)
             Dim value2 = CDec(CurrentInput)
 
+            Dim expression As String = value1 & CurrentOperator & value2 & "="
+
             Select Case CurrentOperator
                 Case "+"
                     result = value1 + value2
@@ -85,14 +95,16 @@
 
             'Clear everything
             Reset()
-            ExpressionTextBox.Text = result
+            ExpressionTextBox.Text = expression
+            OutputTextBox.Text = result
             LastInput = result
 
-
+            'The current input can equal itself
         ElseIf Not String.IsNullOrEmpty(CurrentInput) Then
             result = CDec(CurrentInput)
             Reset()
-            ExpressionTextBox.Text = result
+            ExpressionTextBox.Text = result & "="
+            OutputTextBox.Text = result
             LastInput = result
         End If
 
@@ -110,10 +122,12 @@
 
 
 #Region "Event-Handlers" 'Button Event handlers
-    Private Sub OutputTextBox_TextChanged(sender As Object, e As EventArgs) Handles OutputTextBox.TextChanged
 
-    End Sub
-
+    ''' <summary>
+    ''' Clear all calculator input
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
     Private Sub ClearButton_Click(sender As Object, e As EventArgs) Handles ClearButton.Click
         Reset()
     End Sub
