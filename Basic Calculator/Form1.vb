@@ -9,20 +9,22 @@
     'The previous number that was input
     Dim LastInput As String = ""
 
-    Dim ValueOne As Decimal = 0.0
-    Dim ValueTwo As Decimal = 0.0
-
-
 #Region "General-Functions" 'General-purpose functions
 
     ''' <summary>
-    ''' Add a digit to the number being processed currently
+    ''' Add a digit to the number the user is entering
     ''' </summary>
     ''' <param name="Digit"></param>
     Sub AddDigit(Digit As String)
 
+        ' Clear all previous input if new input is not
         If String.IsNullOrEmpty(CurrentInput) AndAlso String.IsNullOrEmpty(CurrentOperator) Then
             Reset()
+        End If
+
+        ' Don't allow more than one decimal point to be included in a number
+        If Digit = "." AndAlso CurrentInput.Contains(".") Then
+            Return
         End If
         CurrentInput &= Digit
         OutputTextBox.Text = CurrentInput
@@ -38,12 +40,16 @@
         CurrentOperator = Op
     End Sub
 
+    ''' <summary>
+    ''' Handle what happens when a digit button is clicked
+    ''' </summary>
+    ''' <param name="DigitButton"></param>
     Sub DigitClicked(DigitButton As Button)
         AddDigit(DigitButton.Text)
     End Sub
 
     ''' <summary>
-    ''' Clear calculator input
+    ''' Clear calculator state
     ''' </summary>
     Sub Reset()
         ExpressionTextBox.Text = ""
@@ -103,7 +109,7 @@
 
 
 
-#Region "Event-Handlers"
+#Region "Event-Handlers" 'Button Event handlers
     Private Sub OutputTextBox_TextChanged(sender As Object, e As EventArgs) Handles OutputTextBox.TextChanged
 
     End Sub
@@ -151,7 +157,23 @@
         CalculateAndPrint()
     End Sub
 
-#End Region 'Button Event handlers
+    Private Sub SwitchSignButton_Click(sender As Object, e As EventArgs) Handles SwitchSignButton.Click
+
+        ' remove the minus sign from the current number
+        If CurrentInput.StartsWith("-") Then
+            CurrentInput = CurrentInput.Remove(0, 1)
+
+
+        Else ' Add a minus sign to the current number
+            CurrentInput = "-" & CurrentInput
+
+        End If
+
+        OutputTextBox.Text = CurrentInput
+
+    End Sub
+
+#End Region
 
 
 End Class
